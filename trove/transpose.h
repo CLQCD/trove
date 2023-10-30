@@ -514,7 +514,7 @@ struct c2r_warp_transpose_impl<Array, Indices, composite> {
                                 const int& rotation,
                                 const Tile &tile) {
         int warp_id = tile.id();
-        int pre_rotation = warp_id >> static_log<tile.size()/static_gcd<Array::size, tile.size()>::value>::value;
+        int pre_rotation = warp_id >> static_log<Tile::size()/static_gcd<Array::size, Tile::size()>::value>::value;
         src = rotate(src, pre_rotation);
         detail::warp_shuffle<Array, Indices>::impl(src, indices, tile);
         src = rotate(src, rotation);
